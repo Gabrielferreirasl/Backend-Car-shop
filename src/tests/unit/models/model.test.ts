@@ -60,7 +60,7 @@ describe('Generic Model', () => {
       })
     });
 
-    describe('when the document dont exist', () => {
+    describe('when the document dont exists', () => {
       before(() => {
         Sinon.stub(genericDAO.model, 'findOne').resolves(null);
       });
