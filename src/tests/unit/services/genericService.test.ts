@@ -26,8 +26,8 @@ describe('GenericService', () => {
       })
   
       it('must return an list', async () => {
-        const profiles = await genericService.read();
-        expect(profiles).to.be.deep.equal(testMockArray);
+        const item = await genericService.read();
+        expect(item).to.be.deep.equal(testMockArray);
       });
     });
   
@@ -41,8 +41,8 @@ describe('GenericService', () => {
       })
   
       it('must return an object', async () => {
-        const profile = await genericService.create(testMock);
-        expect(profile).to.be.deep.equal(testMock);
+        const item = await genericService.create(testMock);
+        expect(item).to.be.deep.equal(testMock);
       });
     });
   
@@ -97,8 +97,8 @@ describe('GenericService', () => {
           })
 
       it('must return an object', async () => {
-        const profile = await genericService.update(mockUpdate._id, testMock);
-        expect(profile).to.be.deep.equal(mockUpdate);
+        const item = await genericService.update(mockUpdate._id, testMock);
+        expect(item).to.be.deep.equal(mockUpdate);
       });
     });
 
@@ -113,8 +113,8 @@ describe('GenericService', () => {
           })
 
       it('must return null', async () => {
-        const profile = await genericService.update('0', testMock);
-        expect(profile).to.be.null;
+        const item = await genericService.update('0', testMock);
+        expect(item).to.be.null;
       });
     });
 });
@@ -131,8 +131,8 @@ describe('GenericService', () => {
               })
     
               it('must return an object', async () => {
-                const profile = await genericService.delete(testMock._id);
-                expect(profile).to.be.deep.equal(testMock);
+                const item = await genericService.delete(testMock._id);
+                expect(item).to.be.deep.equal(testMock);
               });
         });
         describe('when the document dont exists', async () => {
@@ -146,8 +146,8 @@ describe('GenericService', () => {
               })
     
           it('must return null', async () => {
-            const profile = await genericService.delete('0');
-            expect(profile).to.be.null;
+            const item = await genericService.delete('0');
+            expect(item).to.be.null;
           });
         });
     });
