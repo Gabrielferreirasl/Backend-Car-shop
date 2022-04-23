@@ -16,6 +16,14 @@ export default class GenericController<T> {
 
   public async readOne(req: Request, res: Response): Promise<typeof res> {
     const { id } = req.params;
+    
+    const checkForValidMongoDbID = /^[0-9a-fA-F]{24}$/;
+
+    if (!checkForValidMongoDbID.test(id)) {
+      return res.status(400)
+        .json({ error: 'Id must have 24 hexadecimal characters' });
+    }
+
     const item = await this.service.readOne(id);
     if (!item) return res.status(404).json({ error: 'Object not found' });
     return res.status(200).json(item);
