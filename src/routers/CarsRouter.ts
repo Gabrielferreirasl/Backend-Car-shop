@@ -7,3 +7,5 @@ const carsRouter = Router();
 
 carsRouter
   .post('/cars', (req, res) => carsController.create(req, res));
+
+export default carsRouter;

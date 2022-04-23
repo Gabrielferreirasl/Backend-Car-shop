@@ -1,5 +1,6 @@
 // import CustomRouter from './routes/Router';
 import App from './app';
+import carsRouter from './routers/CarsRouter';
 
 // import exampleController from './controllers/controller-example';
 
@@ -7,11 +8,8 @@ import App from './app';
 
 const server = new App();
 
-// const exampleController = new exampleController();
-
-// const exampleRouter = new CustomRouter<Car>();
 // exampleRouter.addRoute(exampleController);
 
-// server.addRouter(exampleRouter.router);
+server.addRouter(carsRouter);
 
 export default server;

@@ -1,7 +1,8 @@
-import { Model as M } from 'mongoose';
+import { Document, Model as M } from 'mongoose';
+import { Model } from '../interfaces/ModelInterface';
 
-export default class GenericModel<T> {
-  constructor(public model: M<T>) {}
+export default class GenericModel<T> implements Model<T> {
+  constructor(public model: M<T & Document>) {}
 
   public async read(): Promise<T[]> {
     const list = await this.model.find();

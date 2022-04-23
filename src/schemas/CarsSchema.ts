@@ -1,6 +1,8 @@
-import mongoose from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 import { Car } from '../interfaces/CarInterface';
 
-const CarsSchema = new mongoose.Schema<Car>();
+interface CarDocument extends Car, Document { }
+
+const CarsSchema = new mongoose.Schema<CarDocument>();
 
 export default CarsSchema;
