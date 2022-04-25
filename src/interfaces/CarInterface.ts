@@ -1,12 +1,21 @@
+import { Document } from 'mongoose';
 import { z } from 'zod';
-import schemaVehicle from './VehicleInterface';
+import schemaVehicleZood from './VehicleInterface';
 
-const schemaCar = z.object({
-  ...schemaVehicle.shape,
-  doorsQty: z.number().gte(2).lte(4),
-  seatsQty: z.number().gte(2).lte(7),
+export const schemaCarZood = z.object({
+  ...schemaVehicleZood.shape,
+  doorsQty: z.number({
+    required_error: 'doorsQty is required',
+    invalid_type_error: 'dorrsQty must be a number',
+  }).gte(2, { message: 'doorsQty must be 2 or higher' })
+    .lte(4, { message: 'doorsQty must be 4 or lower' }),
+  seatsQty: z.number({
+    required_error: 'seatsQty is required',
+    invalid_type_error: 'seatsQty must be a number',
+  }).gte(2, { message: 'seatsQty must be 2 or higher' })
+    .lte(7, { message: 'seatsQty must be 7 or lower' }),
 });
 
-export default schemaCar;
+export type Car = z.infer<typeof schemaCarZood>;
 
-export type Car = z.infer<typeof schemaCar>;
+export interface CarDocument extends Car, Document { }

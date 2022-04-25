@@ -1,11 +1,18 @@
 import { Router } from 'express';
 import CarsController from '../controllers/CarsController';
+import { schemaCarZood } from '../interfaces/CarInterface';
+import GenericMiddleware from '../middlewares/GenericMiddleware';
 
 const carsController = new CarsController();
+const carsMiddleware = new GenericMiddleware(schemaCarZood);
 
 const carsRouter = Router();
 
 carsRouter
-  .post('/cars', (req, res) => carsController.create(req, res));
+  .post(
+    '/cars', 
+    (req, res, next) => carsMiddleware.validateSchema(req, res, next),
+    (req, res) => carsController.create(req, res),
+  );
 
 export default carsRouter;

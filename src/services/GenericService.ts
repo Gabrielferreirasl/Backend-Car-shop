@@ -19,15 +19,11 @@ export default class GenericService<T> {
   }
 
   public async update(id: string, obj: T): Promise<T | null> {
-    const objToUpdate = await this.readOne(id);
-    if (!objToUpdate) return null;
     const item = await this.model.update(id, obj);
     return item;
   }
 
   public async delete(id: string): Promise<T | null> {
-    const objToDelete = await this.readOne(id);
-    if (!objToDelete) return null;
     const item = await this.model.delete(id);
     return item;
   }
