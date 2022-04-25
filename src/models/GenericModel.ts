@@ -20,7 +20,11 @@ export default class GenericModel<T> implements Model<T> {
   }
 
   public async update(id: string, obj: T): Promise<T | null> {
-    const objUpdated = await this.model.findByIdAndUpdate({ _id: id }, obj);
+    const objUpdated = await this.model.findByIdAndUpdate(
+      { _id: id },
+      obj,
+      { new: true },
+    );
     return objUpdated;
   }
 

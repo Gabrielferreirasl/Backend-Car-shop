@@ -32,8 +32,8 @@ export default class GenericController<T> {
   public async update(req: Request, res: Response): Promise<typeof res> {
     const { id } = req.params;
     const item = await this.service.update(id, req.body);
-    if (!item) return res.status(404).json({ error: 'Not found' });
-    return res.status(201).json(item);
+    if (!item) return res.status(404).json({ error: 'Object not found' });
+    return res.status(200).json(item);
   }
 
   public async delete(req: Request, res: Response): Promise<typeof res> {

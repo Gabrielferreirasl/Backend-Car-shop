@@ -163,9 +163,9 @@ describe('GenericController', () => {
         expect(res.body).to.be.deep.equal(mockUpdate);
       });
 
-      it('must return the code: 201', async () => {
+      it('must return the code: 200', async () => {
         await genericController.update(req, res);
-        expect(res.statusCode).to.be.equal(201);
+        expect(res.statusCode).to.be.equal(200);
       });
     });
 
@@ -182,7 +182,7 @@ describe('GenericController', () => {
 
       it('must return a message of error', async () => {
         await genericController.update(req, res);
-        expect(res.body).to.be.deep.eq({ error: 'Not found'});
+        expect(res.body).to.be.deep.eq({ error: 'Object not found'});
       });
 
       it('must return the code: 404', async () => {

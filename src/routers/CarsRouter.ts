@@ -19,6 +19,12 @@ carsRouter
     '/cars/:id',
     (req, res, next) => carsMiddleware.validateId(req, res, next),
     (req, res) => carsController.readOne(req, res),
+  )
+  .put(
+    '/cars/:id',
+    (req, res, next) => carsMiddleware.validateId(req, res, next),
+    (req, res, next) => carsMiddleware.validateSchema(req, res, next),
+    (req, res) => carsController.update(req, res),
   );
 
 export default carsRouter;
