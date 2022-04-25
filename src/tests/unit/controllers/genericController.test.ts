@@ -119,27 +119,6 @@ describe('GenericController', () => {
                 expect(res.statusCode).to.be.eq(404);
               });
             });
-
-            describe('when the id is invalid', async () => {
-              before(() => {
-                  Sinon.stub(genericController.service, 'readOne').resolves(null);
-                  req.params.id = '1';
-                });
-            
-                after(() => {
-                  Sinon.restore();
-                })
-  
-              it('must return a message of error', async () => {
-                  await genericController.readOne(req, res);
-                  expect(res.body).to.be.deep.eq({ error: 'Id must have 24 hexadecimal characters' });
-                });
-  
-                it('must return the code: 404', async () => {
-                  await genericController.readOne(req, res);
-                  expect(res.statusCode).to.be.eq(400);
-                });
-              });
   
     describe('#update', () => {
         const mockUpdate = {
@@ -195,27 +174,20 @@ describe('GenericController', () => {
     describe('#delete', () => {
         describe('when the document exists', async () => {
             before(() => {
-              Sinon.stub(genericController.service, 'readOne').resolves(testMock);
               Sinon.stub(genericController.service, 'delete').resolves(testMock);
             });
           
               after(() => {
                 Sinon.restore();
               })
-    
-              it('must return an object', async () => {
-                await genericController.delete(req, res);
-                expect(res.body).to.be.deep.equal(testMock);
-              });
 
-              it('must return the code: 201', async () => {
+              it('must return the code: 204', async () => {
                 await genericController.delete(req, res);
-                expect(res.statusCode).to.be.equal(201);
+                expect(res.statusCode).to.be.equal(204);
               });
         });
         describe('when the document dont exists', async () => {
             before(() => {
-                Sinon.stub(genericController.service, 'readOne').resolves(null);
                 Sinon.stub(genericController.service, 'delete').resolves(null);
             });
           
@@ -225,7 +197,7 @@ describe('GenericController', () => {
     
               it('must return a message of error', async () => {
                 await genericController.delete(req, res);
-                expect(res.body).to.be.deep.eq({ error: 'Not found'});
+                expect(res.body).to.be.deep.eq({ error: 'Object not found'});
               });
 
               it('must return the code: 404', async () => {

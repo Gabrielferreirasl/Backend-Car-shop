@@ -25,6 +25,11 @@ carsRouter
     (req, res, next) => carsMiddleware.validateId(req, res, next),
     (req, res, next) => carsMiddleware.validateSchema(req, res, next),
     (req, res) => carsController.update(req, res),
+  )
+  .delete(
+    '/cars/:id',
+    (req, res, next) => carsMiddleware.validateId(req, res, next),
+    (req, res) => carsController.delete(req, res),
   );
 
 export default carsRouter;

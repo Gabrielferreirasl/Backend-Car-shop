@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import GenericService from '../services/GenericService';
 
+const OBJECT_ERROR = 'Object not found';
+
 export default class GenericController<T> {
   constructor(public service: GenericService<T>) {}
 
@@ -17,21 +19,21 @@ export default class GenericController<T> {
   public async readOne(req: Request, res: Response): Promise<typeof res> {
     const { id } = req.params;
     const item = await this.service.readOne(id);
-    if (!item) return res.status(404).json({ error: 'Object not found' });
+    if (!item) return res.status(404).json({ error: OBJECT_ERROR });
     return res.status(200).json(item);
   }
 
   public async update(req: Request, res: Response): Promise<typeof res> {
     const { id } = req.params;
     const item = await this.service.update(id, req.body);
-    if (!item) return res.status(404).json({ error: 'Object not found' });
+    if (!item) return res.status(404).json({ error: OBJECT_ERROR });
     return res.status(200).json(item);
   }
 
   public async delete(req: Request, res: Response): Promise<typeof res> {
     const { id } = req.params;
     const item = await this.service.delete(id);
-    if (!item) return res.status(404).json({ error: 'Not found' });
-    return res.status(201).json(item);
+    if (!item) return res.status(404).json({ error: OBJECT_ERROR });
+    return res.status(204).json(item);
   }
 }
