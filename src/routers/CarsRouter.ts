@@ -14,6 +14,11 @@ carsRouter
     (req, res, next) => carsMiddleware.validateSchema(req, res, next),
     (req, res) => carsController.create(req, res),
   )
-  .get('/cars', (req, res) => carsController.read(req, res));
+  .get('/cars', (req, res) => carsController.read(req, res))
+  .get(
+    '/cars/:id',
+    (req, res, next) => carsMiddleware.validateId(req, res, next),
+    (req, res) => carsController.readOne(req, res),
+  );
 
 export default carsRouter;
