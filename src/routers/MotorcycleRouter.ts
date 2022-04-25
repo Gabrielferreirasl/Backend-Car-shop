@@ -19,6 +19,12 @@ motorcycleRouter
     '/motorcycles/:id',
     (req, res, next) => motorcycleMiddleware.validateId(req, res, next),
     (req, res) => motorcycleController.readOne(req, res),
+  )
+  .put(
+    '/motorcycles/:id',
+    (req, res, next) => motorcycleMiddleware.validateId(req, res, next),
+    (req, res, next) => motorcycleMiddleware.validateSchema(req, res, next),
+    (req, res) => motorcycleController.update(req, res),
   );
 
 export default motorcycleRouter;
