@@ -8,23 +8,30 @@ const motorcycleMiddleware = new GenericMiddleware(schemaMotorcycleZood);
 
 const motorcycleRouter = Router();
 
+const ROUTE = '/motorcycles';
+
 motorcycleRouter
   .post(
-    '/motorcycles', 
+    ROUTE, 
     (req, res, next) => motorcycleMiddleware.validateSchema(req, res, next),
     (req, res) => motorcycleController.create(req, res),
   )
-  .get('/motorcycles', (req, res) => motorcycleController.read(req, res))
+  .get(ROUTE, (req, res) => motorcycleController.read(req, res))
   .get(
-    '/motorcycles/:id',
+    `${ROUTE}/:id`,
     (req, res, next) => motorcycleMiddleware.validateId(req, res, next),
     (req, res) => motorcycleController.readOne(req, res),
   )
   .put(
-    '/motorcycles/:id',
+    `${ROUTE}/:id`,
     (req, res, next) => motorcycleMiddleware.validateId(req, res, next),
     (req, res, next) => motorcycleMiddleware.validateSchema(req, res, next),
     (req, res) => motorcycleController.update(req, res),
+  )
+  .delete(
+    `${ROUTE}/:id`,
+    (req, res, next) => motorcycleMiddleware.validateId(req, res, next),
+    (req, res) => motorcycleController.delete(req, res),
   );
 
 export default motorcycleRouter;
