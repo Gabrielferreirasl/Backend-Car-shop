@@ -13,6 +13,7 @@ motorcycleRouter
     '/motorcycles', 
     (req, res, next) => motorcycleMiddleware.validateSchema(req, res, next),
     (req, res) => motorcycleController.create(req, res),
-  );
+  )
+  .get('/motorcycles', (req, res) => motorcycleController.read(req, res));
 
 export default motorcycleRouter;
