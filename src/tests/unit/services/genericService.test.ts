@@ -104,9 +104,8 @@ describe('GenericService', () => {
 
     describe('when the document dont exists', async () => {
         before(() => {
-            Sinon.stub(genericService.model, 'readOne').resolves(null);
-            Sinon.stub(genericService.model, 'update').resolves(testMock);
-          });
+            Sinon.stub(genericService.model, 'update').resolves(null);
+        });
       
           after(() => {
             Sinon.restore();
@@ -137,8 +136,7 @@ describe('GenericService', () => {
         });
         describe('when the document dont exists', async () => {
             before(() => {
-                Sinon.stub(genericService.model, 'readOne').resolves(null);
-                Sinon.stub(genericService.model, 'delete').resolves(testMock);
+                Sinon.stub(genericService.model, 'delete').resolves(null);
               });
           
               after(() => {

@@ -10,8 +10,8 @@ export default class GenericController<T> {
   }
 
   public async create(req: Request, res: Response): Promise<typeof res> {
-    const created = await this.service.create(req.body);
-    return res.status(201).json(created);
+    const item = await this.service.create(req.body);
+    return res.status(201).json(item);
   }
 
   public async readOne(req: Request, res: Response): Promise<typeof res> {
