@@ -13,6 +13,7 @@ carsRouter
     '/cars', 
     (req, res, next) => carsMiddleware.validateSchema(req, res, next),
     (req, res) => carsController.create(req, res),
-  );
+  )
+  .get('/cars', (req, res) => carsController.read(req, res));
 
 export default carsRouter;
