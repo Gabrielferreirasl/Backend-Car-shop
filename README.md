@@ -18,5 +18,6 @@ database: MongoDb
 To start the server:
 
 ```
+npm i
 npm run dev
 ```
